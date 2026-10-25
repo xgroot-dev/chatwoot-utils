@@ -1,0 +1,4 @@
+# Install scripts of build tools; the package builds without them.
+allowBuilds:
+  core-js-pure: false
+  esbuild: false
