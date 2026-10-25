@@ -143,6 +143,7 @@ describe('#getMessageVariables', () => {
       'conversation.id': 1,
       'inbox.id': 1,
       'inbox.name': 'Inbox 1',
+      'inbox.internal_name': 'Inbox 1',
       'agent.name': 'Samuel Smith',
       'agent.first_name': 'Samuel',
       'agent.last_name': 'Smith',
@@ -151,6 +152,27 @@ describe('#getMessageVariables', () => {
       'conversation.custom_attribute.car_model': 'Tesla Model S',
       'conversation.custom_attribute.car_year': '2022',
     });
+  });
+});
+
+describe('#getMessageVariables inbox internal name', () => {
+  const conversation = {
+    id: 1,
+    meta: { sender: { id: 3, name: 'jane doe' } },
+  } as any;
+
+  it('returns the inbox internal name', () => {
+    const inbox = { id: 5, name: 'Support', internal_name: 'CZ eshop support' };
+    const variables = getMessageVariables({ conversation, inbox });
+
+    expect(variables['inbox.internal_name']).toEqual('CZ eshop support');
+  });
+
+  it('uses the inbox name when the inbox has no internal name', () => {
+    const inbox = { id: 5, name: 'Support', internal_name: null };
+    const variables = getMessageVariables({ conversation, inbox });
+
+    expect(variables['inbox.internal_name']).toEqual('Support');
   });
 });
 

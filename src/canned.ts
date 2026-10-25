@@ -65,6 +65,8 @@ export const getMessageVariables = ({
     'conversation.id': id,
     'inbox.id': inbox?.id,
     'inbox.name': inbox?.name,
+    // Inboxes without an internal name use their name, as the server does
+    'inbox.internal_name': inbox?.internal_name || inbox?.name,
     'agent.name': capitalizeName(assignee?.name || ''),
     'agent.first_name': getFirstName({ user: assignee }),
     'agent.last_name': getLastName({ user: assignee }),

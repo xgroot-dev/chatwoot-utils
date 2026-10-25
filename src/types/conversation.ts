@@ -32,6 +32,7 @@ export interface Contact {
 export interface Inbox {
   id: number;
   name: string;
+  internal_name?: string | null;
 }
 
 export interface Assignee {
